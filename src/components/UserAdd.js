@@ -1,7 +1,7 @@
 import React from 'react';
 
 const UserAdd = () => {
-    
+
 
     let userDetails = event => {
         event.preventDefault();
@@ -19,6 +19,17 @@ const UserAdd = () => {
 
         console.log(data);
         event.target.reset();
+
+        fetch('http://localhost:8000/useradd',{
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(result => console.log(result))
+
     }
 
     return (
