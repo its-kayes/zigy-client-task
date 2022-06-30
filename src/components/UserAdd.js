@@ -25,7 +25,7 @@ const UserAdd = () => {
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(data),
         })
         .then(res => res.json())
         .then(result => console.log(result))

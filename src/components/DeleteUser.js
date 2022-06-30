@@ -1,10 +1,21 @@
 import React from 'react';
+import { useQuery } from 'react-query';
+import Spinner from './Spinner';
 
 const DeleteUser = () => {
+
+    let {data:users, isLoading, refetch} = useQuery('users', ()=> fetch('http://localhost:8000/users').then(res => res.json()));
+
+    if(isLoading) {
+        return <Spinner> </Spinner>
+    }
+
     return (
         <div>
             <p> Delete User </p>
             <div>
+
+                    <p className='text-5xl'> {users.length} </p>
 
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
