@@ -10,6 +10,20 @@ const DeleteUser = () => {
         return <Spinner> </Spinner>
     }
 
+    let deleteUser = id => {
+        console.log(id)
+
+        fetch(`http://localhost:8000/deleteUser/${id}`, {
+            method: "DELETE",
+            headers: {
+                'content-type': 'application/json'
+            },
+
+        })
+        .then(res => res.json())
+        .then(result => console.log(result))
+    } 
+
     return (
         <div>
             <div>
@@ -62,7 +76,7 @@ const DeleteUser = () => {
                                         }
                                     </td>
                                     <td class="px-6 py-4 ">
-                                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete User</a>
+                                        <button onClick={() => deleteUser(user._id)} class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete User</button>
                                     </td>
                                 </tr>)
                             }
