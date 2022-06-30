@@ -1,6 +1,9 @@
+import { toast } from 'react-toastify';
 import React from 'react';
 import { useQuery } from 'react-query';
 import Spinner from './Spinner';
+import { Link } from "react-router-dom";
+
 
 const DeleteUser = () => {
 
@@ -11,21 +14,36 @@ const DeleteUser = () => {
     }
 
     let deleteUser = id => {
-        console.log(id)
 
-        fetch(`http://localhost:8000/deleteUser/${id}`, {
-            method: "DELETE",
-            headers: {
-                'content-type': 'application/json'
-            },
+        let yes = window.confirm('Are you sure to DELETE user?');
 
-        })
-        .then(res => res.json())
-        .then(result => console.log(result))
-    } 
+        if (yes) {
+            fetch(`http://localhost:8000/deleteUser/${id}`, {
+                method: "DELETE",
+                headers: {
+                    'content-type': 'application/json'
+                },
+
+            })
+                .then(res => res.json())
+                .then(result => {
+                    console.log(result);
+                    toast.error('User Deleted');
+                    refetch();
+
+                })
+        }
+
+    }
 
     return (
         <div>
+
+            <div className=' flex justify-end '>
+                <Link to='/' className='px-4 py-2 text-lg font-mono border-2 rounded-lg mx-4 bg-sky-200 text-yellow-600 hover:border-red-300 hover:bg-white hover:text-red-700 '> <i class="fa-solid fa-house-chimney-crack"></i> Back Home </Link>
+                <Link to='/useradd' className='px-4 py-2 text-lg font-mono border-2 rounded-lg mx-4 bg-sky-200 text-yellow-600 hover:border-red-300 hover:bg-white hover:text-red-700 '> <i class="fa-solid fa-person-circle-plus"></i> Add User </Link>
+            </div>
+
             <div>
 
                 <i className='text-5xl flex justify-center my-10'> Total Users {users.length} </i>

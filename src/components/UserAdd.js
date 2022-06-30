@@ -1,4 +1,6 @@
 import React from 'react';
+import { toast } from 'react-toastify';
+import { Link } from "react-router-dom";
 
 const UserAdd = () => {
 
@@ -20,22 +22,29 @@ const UserAdd = () => {
         console.log(data);
         event.target.reset();
 
-        fetch('http://localhost:8000/useradd',{
+        fetch('http://localhost:8000/useradd', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(data),
         })
-        .then(res => res.json())
-        .then(result => console.log(result))
+            .then(res => res.json())
+            .then(result => {
+                console.log(result);
+                toast.success('User Added');
+            })
 
     }
 
     return (
         <div className=' '>
+            <div className=' flex justify-end '>
+                <Link to='/' className='px-4 py-2 text-lg font-mono border-2 rounded-lg mx-4 bg-sky-200 text-yellow-600 hover:border-red-300 hover:bg-white hover:text-red-700 '> <i class="fa-solid fa-house-chimney-crack"></i> Back Home </Link>
+                <Link to='/deleteuser' className='px-4 py-2 text-lg font-mono border-2 rounded-lg mx-4 bg-sky-200 text-yellow-600 hover:border-red-300 hover:bg-white hover:text-red-700 '> <i class="fa-solid fa-trash-can"></i> Delete User </Link>
+            </div>
+            
             <div className='h-screen flex justify-center items-center'>
-
 
                 <div class="p-4 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 lg:p-8 dark:bg-gray-800 dark:border-gray-700 w-full">
                     <form onSubmit={userDetails} class="space-y-6" action="#">
@@ -61,7 +70,6 @@ const UserAdd = () => {
 
                     </form>
                 </div>
-
 
             </div>
         </div>
