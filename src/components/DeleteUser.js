@@ -4,126 +4,68 @@ import Spinner from './Spinner';
 
 const DeleteUser = () => {
 
-    let {data:users, isLoading, refetch} = useQuery('users', ()=> fetch('http://localhost:8000/users').then(res => res.json()));
+    let { data: users, isLoading, refetch } = useQuery('users', () => fetch('http://localhost:8000/users').then(res => res.json()));
 
-    if(isLoading) {
+    if (isLoading) {
         return <Spinner> </Spinner>
     }
 
     return (
         <div>
-            <p> Delete User </p>
             <div>
 
-                    <p className='text-5xl'> {users.length} </p>
+                <i className='text-5xl flex justify-center my-10'> Total Users {users.length} </i>
 
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
-                                    Product name
+                                    User name
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Color
+                                    Email
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Category
+                                    Number
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Price
+                                    Address
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    <span class="sr-only">Edit</span>
+                                    Action
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                                    Apple MacBook Pro 17"
-                                </th>
-                                <td class="px-6 py-4">
-                                    Sliver
-                                </td>
-                                <td class="px-6 py-4">
-                                    Laptop
-                                </td>
-                                <td class="px-6 py-4">
-                                    $2999
-                                </td>
-                                <td class="px-6 py-4 text-right">
-                                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                </td>
-                            </tr>
-                            <tr class="border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                                    Microsoft Surface Pro
-                                </th>
-                                <td class="px-6 py-4">
-                                    White
-                                </td>
-                                <td class="px-6 py-4">
-                                    Laptop PC
-                                </td>
-                                <td class="px-6 py-4">
-                                    $1999
-                                </td>
-                                <td class="px-6 py-4 text-right">
-                                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                </td>
-                            </tr>
-                            <tr class="border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                                    Magic Mouse 2
-                                </th>
-                                <td class="px-6 py-4">
-                                    Black
-                                </td>
-                                <td class="px-6 py-4">
-                                    Accessories
-                                </td>
-                                <td class="px-6 py-4">
-                                    $99
-                                </td>
-                                <td class="px-6 py-4 text-right">
-                                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                </td>
-                            </tr>
-                            <tr class="border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                                    Google Pixel Phone
-                                </th>
-                                <td class="px-6 py-4">
-                                    Gray
-                                </td>
-                                <td class="px-6 py-4">
-                                    Phone
-                                </td>
-                                <td class="px-6 py-4">
-                                    $799
-                                </td>
-                                <td class="px-6 py-4 text-right">
-                                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                </td>
-                            </tr>
-                            <tr class="odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                                    Apple Watch 5
-                                </th>
-                                <td class="px-6 py-4">
-                                    Red
-                                </td>
-                                <td class="px-6 py-4">
-                                    Wearables
-                                </td>
-                                <td class="px-6 py-4">
-                                    $999
-                                </td>
-                                <td class="px-6 py-4 text-right">
-                                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                </td>
-                            </tr>
+
+                            {
+                                users.map(user => <tr class="border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700">
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                                        {
+                                            user.name
+                                        }
+                                    </th>
+                                    <td class="px-6 py-4">
+                                        {
+                                            user.email
+                                        }
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {
+                                            user.number
+                                        }
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {
+                                            user.address
+                                        }
+                                    </td>
+                                    <td class="px-6 py-4 ">
+                                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete User</a>
+                                    </td>
+                                </tr>)
+                            }
                         </tbody>
                     </table>
                 </div>
